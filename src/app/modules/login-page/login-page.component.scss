@@ -13,9 +13,15 @@
   background-size: cover;
   background-repeat: no-repeat;
 
+  .logo {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+
   .container {
     position: relative;
-    width: 60vw;
+    width: 45vw;
     max-width: 100%;
     height: 60vh;
     background: #fff;
@@ -23,6 +29,7 @@
     border-radius: 0.7rem;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     transition: transform 0.6s ease-in-out;
+
 
     &.right-panel-active {
       .sign-in {
@@ -36,6 +43,7 @@
       }
 
       .overlay-container {
+
         transform: translateX(-100%);
       }
 
@@ -45,10 +53,12 @@
 
       .overlay-left {
         transform: translateX(0);
+
       }
 
       .overlay-right {
         transform: translateX(20%);
+
       }
     }
 
@@ -61,7 +71,10 @@
       height: 100%;
       transition: all 0.6s ease-in-out;
     }
-
+    .sign-in{
+      z-index: 2;
+      transform: translateX(100%);
+    }
     .sign-up {
       opacity: 0;
       z-index: 1;
@@ -90,10 +103,14 @@
 
       input {
         border: 1px solid gray;
-        padding: 0.3rem;
+        padding: 0.5rem;
+        width: 12vw;
+
         margin-bottom: 1rem;
         border-radius: 0.5rem;
         outline: none;
+
+
       }
 
       a {
@@ -104,7 +121,7 @@
 
       button {
         background-color: rgb(111, 111, 167);
-        padding: 0.3rem;
+        padding: 0.5rem;
         width: 10vw;
         cursor: pointer;
         border-radius: 0.4rem;
@@ -125,7 +142,8 @@
       height: 100%;
       overflow: hidden;
       transition: transform 0.6s ease-in-out;
-      z-index: 100;
+      z-index: 1;
+    
 
       .overlay {
         position: relative;
@@ -134,21 +152,49 @@
         left: -100%;
         height: 100%;
         width: 200%;
-        background: linear-gradient(to right, #ff4b28, #ff416c);
+        background: rgb(2, 0, 36);
+        background: linear-gradient(90deg, rgba(48,44,113,1) 0%, rgba(186,186,186,1) 100%);
         transition: transform 0.6s ease-in-out;
+
+        #login,
+        #register {
+          background: none;
+          border: 2px solid #fff;
+
+          padding: .5rem;
+          width: 10vw;
+          height: auto;
+
+          border-radius: .4rem;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #9e9e9ea2;
+          }
+        }
       }
 
       .overlay-left,
       .overlay-right {
         position: absolute;
         @include center_itens();
+        gap: 4rem;
         flex-direction: column;
         text-align: center;
         padding: 0 40px;
         width: 50%;
         height: 100%;
         top: 0;
+
+        margin-left: 6rem;
         transition: transform 0.6s ease-in-out;
+
+
+
+        p {
+          height: auto;
+          width: 16vw;
+        }
       }
 
       .overlay-left {
