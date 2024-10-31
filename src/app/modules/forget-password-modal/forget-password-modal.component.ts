@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-forget-password-modal',
   standalone: true,
-  imports: [],
+  imports: [RouterLinkActive, RouterLink],
   templateUrl: './forget-password-modal.component.html',
-  styleUrl: '../login-page/login-page.component.scss'
+  styleUrl: './forget-password.scss'
 })
 export class ForgetPasswordModalComponent {
 

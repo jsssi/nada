@@ -1,25 +1,47 @@
 <h1 class="logo">Logo.</h1>
 
-<div class="container" id="main" #main >
+<div class="container" id="main" #main>
 
   <div class="sign-up">
     <form>
       <h1>Create Account</h1>
-      <input type="text" placeholder="Name" required>
-      <input type="email" placeholder="Email" required>
-      <input type="password" placeholder="Password" required>
-      <input type="password" placeholder="Confirm Password" required>
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input type="text"  name="name" >
+      </div>
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" name="email" >
+      </div>
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input type="password" name="password" >
+      </div>
+      <div class="form-field">
+        <label for="comfirm password">Comfirm Password</label>
+        <input type="password" name="comfirm password">
+      </div>
 
       <button class="btn-form">Sign Up</button>
     </form>
   </div>
   <div class="sign-in">
-    <form>
+    <form [formGroup]="loginForm">
       <h1>Sign in</h1>
-      <input type="email" placeholder="Email" required>
-      <input type="password" placeholder="Password" required>
-      <a href="#"> Forget your password</a>
-      <button class="btn-form">Sign In</button>
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" name="email" formControlName="email">
+      </div>
+
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input type="password" name="password" formControlName="password">
+      </div>
+
+      <a routerLink="/forgetPassword" routerLinkActive="active"> Forget your
+        password</a>
+
+      <button class="btn-form" (click)="onCLick($event)">Sign In</button>
     </form>
   </div>
   <div class="overlay-container">
