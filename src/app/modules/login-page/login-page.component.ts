@@ -1,5 +1,5 @@
 import { Component, ElementRef, Renderer2, viewChild, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ForgetPasswordModalComponent } from "../forget-password-modal/forget-password-modal.component";
 import { NgIf } from '@angular/common';
 
@@ -7,7 +7,7 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [ForgetPasswordModalComponent, NgIf],
+  imports: [ForgetPasswordModalComponent,RouterLink , RouterLinkActive],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
