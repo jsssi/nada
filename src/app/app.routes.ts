@@ -14,8 +14,8 @@ export const routes: Routes = [
     component:HomePageComponent
   },
   {
-    path:'forgot-password',
-    component: ForgetPasswordModalComponent
+    path:'forgetPassword',
+    component:ForgetPasswordModalComponent
   },
   {
     path:'',

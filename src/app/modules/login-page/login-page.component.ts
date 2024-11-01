@@ -1,13 +1,14 @@
-import { Component, ElementRef, Renderer2, viewChild, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Renderer2, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ForgetPasswordModalComponent } from "../forget-password-modal/forget-password-modal.component";
 import { NgIf } from '@angular/common';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [ForgetPasswordModalComponent,RouterLink , RouterLinkActive],
+  imports: [ForgetPasswordModalComponent, RouterLink, RouterLinkActive , ReactiveFormsModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
@@ -18,8 +19,12 @@ export class LoginPageComponent {
   @ViewChild('login', { static: false }) loginButtonRef!: ElementRef;
 
 
-  constructor(private renderer: Renderer2) { }
-
+  constructor(private renderer: Renderer2 , private Router:Router){ }
+  private formBuilder = inject(FormBuilder);
+  protected loginForm = this.formBuilder.group({
+    email: ['', Validators.required],
+    password: ['', Validators.required]
+  })
   ngAfterViewInit() {
 
     if (this.registerButtonRef) {
@@ -38,5 +43,9 @@ export class LoginPageComponent {
         }
       })
     }
+  }
+  onCLick(event:Event){
+    event.preventDefault();
+    this.Router.navigate(['/home']);
   }
 }

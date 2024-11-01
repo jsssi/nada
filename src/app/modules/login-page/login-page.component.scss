@@ -71,10 +71,12 @@
       height: 100%;
       transition: all 0.6s ease-in-out;
     }
-    .sign-in{
+
+    .sign-in {
       z-index: 2;
       transform: translateX(100%);
     }
+
     .sign-up {
       opacity: 0;
       z-index: 1;
@@ -92,6 +94,18 @@
       h1 {
         font-weight: bold;
         margin-bottom: 1rem;
+        font-size: 1rem
+      }
+
+      .form-field {
+        @include center_itens();
+        align-items: flex-start;
+        flex-direction: column;
+
+        label {
+          opacity: .5;
+          font-size: .8rem;
+        }
       }
 
       p {
@@ -110,7 +124,11 @@
         border-radius: 0.5rem;
         outline: none;
 
+        transition: all .4s ease-in-out;
 
+        &:focus {
+          border: 1px solid #000;
+        }
       }
 
       a {
@@ -143,19 +161,26 @@
       overflow: hidden;
       transition: transform 0.6s ease-in-out;
       z-index: 1;
-    
+
 
       .overlay {
         position: relative;
         color: #fff;
-        background-color: #ff416c;
+
         left: -100%;
         height: 100%;
         width: 200%;
         background: rgb(2, 0, 36);
-        background: linear-gradient(90deg, rgba(48,44,113,1) 0%, rgba(186,186,186,1) 100%);
+        background: linear-gradient(90deg, rgba(48, 44, 113, 1) 0%, rgba(186, 186, 186, 1) 100%);
         transition: transform 0.6s ease-in-out;
+        h1{
+          font-size: 1.5rem;
+          font-weight: bold;
 
+         
+          width: 100%;
+          height: auto;
+        }
         #login,
         #register {
           background: none;
@@ -186,10 +211,8 @@
         height: 100%;
         top: 0;
 
-        margin-left: 6rem;
+        margin-left: 4.5rem;
         transition: transform 0.6s ease-in-out;
-
-
 
         p {
           height: auto;
