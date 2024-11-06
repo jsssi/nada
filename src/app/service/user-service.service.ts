@@ -6,24 +6,24 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root'
 })
 export class UserServiceService {
-  private users :User[]=[];
-  constructor(){
-  this.loadLocalStorage();
+  private users: User[] = [];
+  constructor() {
+    this.loadLocalStorage();
   }
-  private loadLocalStorage(){
-     const data = localStorage.getItem('users');
-     if(data){
+  private loadLocalStorage() {
+    const data = localStorage.getItem('users');
+    if (data) {
       this.users = JSON.parse(data)
-     }
+    }
   }
-  private SaveInLocalStorage(){
+  private SaveInLocalStorage() {
     localStorage.setItem('users', JSON.stringify(this.users));
   }
-   setUSer(user:User){
+  setUSer(user: User) {
     this.users.push(user);
     this.SaveInLocalStorage();
   }
-   getUsers() : User[]{
+  getUsers(): User[] {
     return this.users;
   }
 }

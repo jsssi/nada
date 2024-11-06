@@ -3,6 +3,8 @@ import { NavBarComponent } from "../nav-bar/nav-bar.component";
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { UserServiceService } from '../../service/user-service.service';
 import User from '../../model/user';
+import product from '../../model/Products';
+import { productService } from '../../service/product.service';
 
 
 
@@ -17,22 +19,15 @@ export class HomePageComponent {
 
   //Bagunça//
 
-  products = [
-    { name: 'celular', value: 19, quantity: 1 },
-    { name: 'pc', value: 20, quantity: 1, active: false },
-    { name: 'pc', value: 20, quantity: 1, active: false },
-    { name: 'pc', value: 20, quantity: 1, active: false }
-  ]
-
-
   @ViewChild('main') mainRef!: ElementRef;
   @ViewChild('register', { static: false }) registerBtnRef!: ElementRef;
   @ViewChild('list', { static: false }) listBtnRef!: ElementRef;
   //modal-expansive-edit-product
 
   cardIndex: number | null = null;
+  products : product[]=[];
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2 , private productService : productService) {
 
   }
 
@@ -58,9 +53,17 @@ export class HomePageComponent {
     this.cardIndex = this.cardIndex === index ? null : index;
   }
   closeExpansion(): void {
-    // Fecha qualquer card expandido
     this.cardIndex = null;
   }
-
+  //Products Service list
+  addProduct(){
+    const newProduct : product = {
+      id: 10,
+      name: 'Novo Produto',
+      price: 99.99,
+      quantity: 10
+    }
+    this.productService.addProduct(newProduct);
+  }
 }
 
