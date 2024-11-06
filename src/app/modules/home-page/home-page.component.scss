@@ -9,8 +9,8 @@
 
   .main-container {
 
-    width: 50vw;
-    height: 70vh;
+    width: 60vw;
+    height: 75vh;
 
     background-color: #fff;
     box-shadow: 0px 2px 19px 0px rgba(0, 0, 0, 0.75);
@@ -139,54 +139,178 @@
       }
 
       .list-cards {
+
         height: 100%;
-        width: 100%;
+        width: auto;
 
         padding-inline: .3rem;
+        overflow: hidden;
+        overflow-y: scroll;
+
+        display: flex;
+
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-left: 5rem;
 
         .card {
           @include center_itens();
-          justify-content: space-around;
+
+
+          background-color: rgb(97, 97, 126);
 
           border-radius: .5rem;
 
-          width: 100%;
-          height: 10vh;
+          max-width: 15vw;
+          height: 40vh;
 
           box-shadow: 0px 2px 19px 0px rgba(0, 0, 0, 0.75);
 
-          h3 {
-            font-size: 1.2rem;
-            text-transform: capitalize;
-            font-weight: bold;
+          padding: 1rem;
+
+          transition: all .3s ease-in-out;
+
+          .text-card-description {
+            @include center_itens();
+            flex-direction: column;
+
+
+
+            width: 40%;
+            height: 100%;
+
+            .texts {
+              @include center_itens();
+              flex-direction: column;
+              gap: 1rem;
+              width: 100%;
+              margin-bottom: 1rem;
+
+              h3,
+              p {
+                @include center_itens();
+                flex-direction: column;
+
+                border-bottom: .1rem solid #333333;
+                width: 60%;
+
+                color: #fff;
+                font-weight: 500;
+                font-size: .7rem;
+
+                span {
+                  color: #000;
+
+                }
+              }
+            }
+
+            .buttons-options {
+              @include center_itens();
+              gap: .5rem;
+
+              button {
+                padding:.3rem 1rem;
+
+                width: 5vw;
+                height: auto;
+
+                cursor: pointer;
+
+                font-size: .7rem;
+              }
+            }
           }
 
-          p {
-            font-size: .9rem;
-            font-weight: 400;
+          .form-edit-group {
+            display: none;
           }
 
-          .buttons-options {
+          &.card-extends {
             @include center_itens();
             gap: 1.0rem;
 
-            .trash,
-            .edit {
-              padding: 0.5rem 1rem;
-              color: #ffff;
-              font-size: 1rem;
+            height: 40vh;
+            max-width: 30vw;
 
+            transition: all .5s ease-in-out;
+            .text-card-description {
               @include center_itens();
-              gap: .2rem;
+              flex-direction: column;
+
+
+
+              width: 40%;
+              height: 100%;
+
+              .texts {
+                @include center_itens();
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                margin-bottom: 1rem;
+
+                h3,
+                p {
+                  @include center_itens();
+                  flex-direction: column;
+
+                  border-bottom: .1rem solid #333333;
+                  width: 60%;
+
+                  color: #fff;
+                  font-weight: 500;
+                  font-size: .7rem;
+
+                  span {
+                    color: #000;
+
+                  }
+                }
+              }
+
+              .buttons-options {
+                @include center_itens();
+                gap: .5rem;
+
+                button {
+                  padding:.3rem 1rem;
+
+                  width: 5vw;
+                  height: auto;
+
+                  cursor: pointer;
+
+                  font-size: .7rem;
+                }
+              }
+            }
+            .form-edit-group {
+              @include center_itens();
+              flex-direction: column;
+              gap: 1.0rem;
+
+              .form-field {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                input {
+                  padding: .2rem 1rem;
+                  outline: none;
+                  border-radius: .3rem;
+
+                  transition: all .5s ease-in-out;
+
+                }
+
+              }
+              .buttons-form{
+                @include center_itens();
+                gap: 1.0rem;
+              }
             }
 
-            .trash {
-              background-color: rgb(89, 32, 32);
-            }
-
-            .edit {
-              background-color: rgb(92, 90, 36);
-            }
           }
         }
       }
