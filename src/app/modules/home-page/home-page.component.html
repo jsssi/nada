@@ -5,29 +5,31 @@
     <button #register>Registrar Produto</button>
     <button #list>Exibir Produtos</button>
   </div>
-  <form class="form-group">
+  <form [formGroup]='productForm' #forDir='ngForm' class="form-group"
+    (ngSubmit)="addProduct()">
     <h1>Cadastro de Produto</h1>
     <div class="form-field">
-      <label for="name-product">Name</label>
-      <input type="text" class="name-product">
+      <label>Name</label>
+      <input type="text" class="name-product" formControlName='name'>
     </div>
     <div class="form-field">
-      <label for="product-value">Valor</label>
-      <input type="text" class="product-value">
+      <label>Valor</label>
+      <input type="number" class="product-value" formControlName='value'>
     </div>
     <div class="form-field">
-      <label for="product-qauntity">Quantidade</label>
-      <input type="text" class="product-quantity">
+      <label>Quantidade</label>
+      <input type="number" class="product-quantity" formControlName='quantity'>
     </div>
     <div class="buttons-form">
-      <button>Registrar</button>
+      <button type="submit">Registrar</button>
       <button>Cancelar</button>
     </div>
   </form>
   <div class="modal-list">
     <h1>Lista de Produtos</h1>
     <div class="list-cards">
-      <div class="card" *ngFor="let product of products; let i = index" class="card" [ngClass]="{'card-extends': cardIndex === i}">
+      <div class="card" *ngFor="let product of products; let i = index"
+        class="card" [ngClass]="{'card-extends': cardIndex === i}">
         <div class="text-card-description">
           <div class="texts">
             <h3>Nome<span>{{product.name}}</span></h3>
@@ -36,29 +38,32 @@
           </div>
 
           <div class="buttons-options">
-            <button class="trash"><i class="bi bi-trash"></i>Delete</button>
-            <button class="edit"[ngClass]="{'active': product.active}"
-            (click)="toggleButton(i)"><i class="bi bi-pencil-square"></i>
+            <button class="trash" (click)="RemoveCard(i)"><i
+                class="bi bi-trash"></i>Delete</button>
+            <button class="edit" [ngClass]="{'active': product.active}"
+              (click)="toggleButton(i)"><i class="bi bi-pencil-square"></i>
               Editar</button>
           </div>
         </div>
 
-        <form class="form-edit-group">
+        <form class="form-edit-group" [formGroup]="editProductForm" #formDir = 'ngForm'>
           <div class="form-field">
-            <label for="name">Nome</label>
-            <input type="text">
+            <label>Nome</label>
+            <input type="text" formControlName="NewName">
           </div>
           <div class="form-field">
-            <label for="value">Valor</label>
-            <input type="text">
+            <label>Valor</label>
+            <input type="number" formControlName="NewValue">
           </div>
           <div class="form-field">
-            <label for="quantity">Quantidade</label>
-            <input type="text">
+            <label>Quantidade</label>
+            <input type="number" formControlName="NewQuantity">
           </div>
           <div class="buttons-form">
-            <button class="btn-form" type="button">Salvar</button>
-            <button *ngIf="cardIndex === i" (click)="closeExpansion()" type="button">Cancelar</button>
+            <button class="btn-form" type="button"
+              (click)="editCardProduct(i)">Salvar</button>
+            <button *ngIf="cardIndex === i" (click)="closeExpansion()"
+              type="button">Cancelar</button>
           </div>
         </form>
       </div>

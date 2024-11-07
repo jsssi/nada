@@ -17,7 +17,7 @@ import User from '../../model/user';
 export class LoginPageComponent implements OnInit {
 
   users: User[] = [];
-  
+
 
   @ViewChild('main') containerRef!: ElementRef;
   @ViewChild('register', { static: false }) registerButtonRef!: ElementRef;
@@ -67,5 +67,6 @@ export class LoginPageComponent implements OnInit {
     this.users = this.userService.getUsers();
     console.log(this.users);
   }
+  
 
 }

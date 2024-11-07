@@ -1,6 +1,6 @@
-export default interface product{
-    id: number;
-    name: string;
-    price: number;
-    quantity: number;
+export default interface product {
+  name: string;
+  value: number;
+  quantity: number;
+  active?: boolean;
 }

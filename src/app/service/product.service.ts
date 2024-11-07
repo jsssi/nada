@@ -26,13 +26,17 @@ export class productService {
     this.products.push(product);
     this.saveProductsLocal();
   }
-  editProduct(Newproduct: product) {
-    const index = this.products.findIndex(p => p.id === Newproduct.id);
-    if (index > -1) {
-      this.products[index] = Newproduct;
+  editProduct(Newproduct: product , i:number) {
+      this.products[i] = Newproduct;
       this.saveProductsLocal();
-    }
+
   }
+  deleteProduct(index: number) {
+
+    this.products.splice(index, 1);
+    this.saveProductsLocal();
+  }
+  
 }
 
 
