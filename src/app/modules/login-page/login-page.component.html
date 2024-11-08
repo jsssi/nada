@@ -3,39 +3,36 @@
 <div class="container" id="main" #main>
 
   <div class="sign-up">
-    <form>
+    <form [formGroup]="RegisterForm" #formDir="ngForm">
       <h1>Create Account</h1>
       <div class="form-field">
-        <label for="name">Name</label>
-        <input type="text"  name="name" >
+        <label>Name</label>
+        <input type="text" formControlName="name">
       </div>
       <div class="form-field">
-        <label for="email">Email</label>
-        <input type="email" name="email" >
+        <label>Email</label>
+        <input type="text" formControlName="email">
       </div>
       <div class="form-field">
-        <label for="password">Password</label>
-        <input type="password" name="password" >
-      </div>
-      <div class="form-field">
-        <label for="comfirm password">Comfirm Password</label>
-        <input type="password" name="comfirm password">
+        <label>Password</label>
+        <input type="password" formControlName="senha">
       </div>
 
-      <button class="btn-form">Sign Up</button>
+
+      <button class="btn-form" (click)="addUser()">Sign Up</button>
     </form>
   </div>
   <div class="sign-in">
-    <form >
+    <form [formGroup]="LoginForm" #formDir="ngForm">
       <h1>Sign in</h1>
       <div class="form-field">
-        <label for="email">Email</label>
-        <input type="email" name="email">
+        <label>Nome</label>
+        <input type="text" formControlName="nome">
       </div>
 
       <div class="form-field">
-        <label for="password">Password</label>
-        <input type="password" name="password">
+        <label>Senha</label>
+        <input type="password" formControlName="senha">
       </div>
 
       <a routerLink="/forgetPassword" routerLinkActive="active"> Forget your

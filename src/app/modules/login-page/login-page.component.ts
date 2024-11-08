@@ -4,7 +4,8 @@ import { ForgetPasswordModalComponent } from "../forget-password-modal/forget-pa
 import { NgIf } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserServiceService } from '../../service/user-service.service';
-import User from '../../model/user';
+import { User } from '../../model/user';
+
 
 
 @Component({
@@ -14,6 +15,7 @@ import User from '../../model/user';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
+
 export class LoginPageComponent implements OnInit {
 
   users: User[] = [];
@@ -27,13 +29,29 @@ export class LoginPageComponent implements OnInit {
   constructor(private renderer: Renderer2, private Router: Router, private userService: UserServiceService) {
 
   }
+  //forms login and RegisterPage
+  RegisterForm!: FormGroup;
+  LoginForm!: FormGroup;
   ngOnInit(): void {
     this.users = this.userService.getUsers();
+    console.log(this.users)
+    this.RegisterForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      senha: new FormControl('', [Validators.required]),
+
+    })
+    this.LoginForm = new FormGroup({
+      nome: new FormControl('', [Validators.required]),
+      senha: new FormControl('', [Validators.required])
+    })
+
+
   }
 
   ngAfterViewInit() {
 
-      if(this.registerButtonRef) {
+    if (this.registerButtonRef) {
       this.renderer.listen(this.registerButtonRef.nativeElement, 'click', () => {
 
         if (this.containerRef) {
@@ -52,21 +70,30 @@ export class LoginPageComponent implements OnInit {
   }
   onCLick(event: Event) {
     event.preventDefault();
-    this.Router.navigate(['/home']);
+    const nome = String(this.LoginForm.get('nome')?.value || '').trim();
+    const senha = Number(this.LoginForm.get('senha')?.value)
 
-    this.addUser();  //adicionar novo usuario ao array de users
+    console.log("Email:", nome, "Senha:", senha); // Verificar os valores no console
+
+    // Verifica se existe um usuário com as credenciais fornecidas
+    this.users.forEach(user =>{
+      if(user.name == nome && user.senha == senha ){
+        this.Router.navigate(['/home']);
+        return;
+      }else{
+        alert('usuario ou senha Invalidos')
+      }
+    })
+
+
   }
   //service User//
   addUser() {
-    const newUser: User = {
-      idUser: '9',
-      nameUser: 'Novo Usuario',
-      emailUser: 'novoUsuario@email.com'
-    }
+    const newUser = this.RegisterForm.value;
     this.userService.setUSer(newUser);
     this.users = this.userService.getUsers();
     console.log(this.users);
   }
-  
+  //form login//
 
 }

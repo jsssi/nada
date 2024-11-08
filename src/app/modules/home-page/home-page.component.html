@@ -5,23 +5,34 @@
     <button #register>Registrar Produto</button>
     <button #list>Exibir Produtos</button>
   </div>
-  <form [formGroup]='productForm' #forDir='ngForm' class="form-group"
+  <form [formGroup]='productForm' #formDir='ngForm' class="form-group"
     (ngSubmit)="addProduct()">
     <h1>Cadastro de Produto</h1>
     <div class="form-field">
       <label>Name</label>
       <input type="text" class="name-product" formControlName='name'>
+
+      <div class="danger-text" *ngIf="productForm.controls['name'].invalid && (productForm.controls['name'].touched || productForm.controls['name'].dirty)">
+          <span *ngIf="productForm.controls['name'].errors?.['required']">campo obrigatorio</span>
+      </div>
     </div>
     <div class="form-field">
       <label>Valor</label>
       <input type="number" class="product-value" formControlName='value'>
+      <div class="danger-text" *ngIf="productForm.controls['value'].invalid && (productForm.controls['value'].touched || productForm.controls['value'].dirty)">
+        <span *ngIf="productForm.controls['value'].errors?.['required']">campo obrigatorio</span>
+        <span *ngIf="productForm.controls['value'].errors?.['pattern']">Apenas numeros sao permitidos</span>
+        </div>
     </div>
     <div class="form-field">
       <label>Quantidade</label>
       <input type="number" class="product-quantity" formControlName='quantity'>
+      <div class="danger-text" *ngIf="productForm.controls['quantity'].invalid && (productForm.controls['quantity'].touched || productForm.controls['quantity'].dirty)">
+        <span *ngIf="productForm.controls['quantity'].errors?.['required']">campo obrigatorio</span>
+    </div>
     </div>
     <div class="buttons-form">
-      <button type="submit">Registrar</button>
+      <button type="submit" [disabled]="productForm.invalid" [ngClass]="{'disable-button': productForm.invalid}">Registrar</button>
       <button>Cancelar</button>
     </div>
   </form>
@@ -50,18 +61,33 @@
           <div class="form-field">
             <label>Nome</label>
             <input type="text" formControlName="NewName">
+            <div class="danger-text" *ngIf="editProductForm.controls['NewName'].invalid && (editProductForm.controls['NewName'].touched || editProductForm.controls['NewName'].dirty)">
+              <span *ngIf="editProductForm.controls['NewName'].errors?.['required']">
+                campo obrigatorio
+              </span>
+            </div>
           </div>
           <div class="form-field">
             <label>Valor</label>
             <input type="number" formControlName="NewValue">
+            <div class="danger-text" *ngIf="editProductForm.controls['NewValue'].invalid && (editProductForm.controls['NewValue'].touched || editProductForm.controls['NewValue'].dirty)">
+              <span *ngIf="editProductForm.controls['NewValue'].errors?.['required']">
+                campo obrigatorio
+              </span>
+            </div>
           </div>
           <div class="form-field">
             <label>Quantidade</label>
             <input type="number" formControlName="NewQuantity">
+            <div class="danger-text" *ngIf="editProductForm.controls['NewQuantity'].invalid && (editProductForm.controls['NewQuantity'].touched || editProductForm.controls['NewQuantity'].dirty)">
+              <span *ngIf="editProductForm.controls['NewQuantity'].errors?.['required']">
+                campo obrigatorio
+              </span>
+            </div>
           </div>
           <div class="buttons-form">
             <button class="btn-form" type="button"
-              (click)="editCardProduct(i)">Salvar</button>
+              (click)="editCardProduct(i)" [disabled]="editProductForm.invalid" [ngClass]="{'disable-button':editProductForm.invalid}">Salvar</button>
             <button *ngIf="cardIndex === i" (click)="closeExpansion()"
               type="button">Cancelar</button>
           </div>

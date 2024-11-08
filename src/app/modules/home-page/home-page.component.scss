@@ -25,6 +25,22 @@
 
     gap: 2rem;
 
+    .danger-text {
+      span {
+        font-size: .7rem;
+        color: red;
+      }
+    }
+
+    button {
+      &.disable-button {
+        background-color: gray;
+        opacity: .5;
+        color: #000;
+        cursor: not-allowed;
+      }
+    }
+
     &.main-container-overlay {
       .form-group {
         transform: translateX(-100%);
@@ -113,6 +129,7 @@
 
       }
 
+
       &.move-main {
         transform: translateX(-100%);
 
@@ -141,7 +158,8 @@
       .list-cards {
 
         height: 100%;
-        width: auto;
+        width: 100%;
+
 
         padding-inline: .3rem;
         overflow: hidden;
@@ -162,7 +180,7 @@
           border-radius: .5rem;
 
           max-width: 15vw;
-          height: 40vh;
+          height: 12rem;
 
           box-shadow: 0px 2px 19px 0px rgba(0, 0, 0, 0.75);
 
@@ -210,7 +228,7 @@
               gap: .5rem;
 
               button {
-                padding:.3rem 1rem;
+                padding: .3rem 1rem;
 
                 width: 5vw;
                 height: auto;
@@ -230,10 +248,11 @@
             @include center_itens();
             gap: 1.0rem;
 
-            height: 40vh;
+            height: 16rem;
             max-width: 30vw;
 
             transition: all .5s ease-in-out;
+
             .text-card-description {
               @include center_itens();
               flex-direction: column;
@@ -274,7 +293,7 @@
                 gap: .5rem;
 
                 button {
-                  padding:.3rem 1rem;
+                  padding: .3rem 1rem;
 
                   width: 5vw;
                   height: auto;
@@ -285,15 +304,23 @@
                 }
               }
             }
+
             .form-edit-group {
               @include center_itens();
               flex-direction: column;
-              gap: 1.0rem;
+              gap: .5rem;
 
               .form-field {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
+
+                height: 100%;
+
+                label {
+                  font-size: .9rem;
+
+                }
 
                 input {
                   padding: .2rem 1rem;
@@ -305,7 +332,8 @@
                 }
 
               }
-              .buttons-form{
+
+              .buttons-form {
                 @include center_itens();
                 gap: 1.0rem;
               }

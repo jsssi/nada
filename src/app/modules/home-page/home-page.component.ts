@@ -1,8 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NavBarComponent } from "../nav-bar/nav-bar.component";
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import { UserServiceService } from '../../service/user-service.service';
-import User from '../../model/user';
 import product from '../../model/Products';
 import { productService } from '../../service/product.service';
 import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -18,7 +17,8 @@ import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Valid
     NgClass,
     NgIf,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
@@ -44,14 +44,14 @@ export class HomePageComponent implements OnInit {
     this.products = this.productService.getAllProducts();
 
     this.productForm = new FormGroup({
-      name: new FormControl(''),
-      value: new FormControl(''),
-      quantity: new FormControl(''),
+      name: new FormControl('',[Validators.required]),
+      value: new FormControl('',[Validators.required , Validators.pattern('^[0-9]*$')]),
+      quantity: new FormControl('',[Validators.required , Validators.min(1)]),
     })
     this.editProductForm = new FormGroup({
-      NewName: new FormControl(''),
-      NewValue: new FormControl(''),
-      NewQuantity: new FormControl('')
+      NewName: new FormControl('',[Validators.required]),
+      NewValue: new FormControl('',[Validators.required]),
+      NewQuantity: new FormControl('',[Validators.required]),
     })
   }
   //Dom Page//
@@ -108,7 +108,6 @@ export class HomePageComponent implements OnInit {
 
 
     let updatedValues: any = { active };
-
 
     if (NewName !== null && NewName !== '') {
       updatedValues.name = NewName;
