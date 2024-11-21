@@ -1,6 +1,10 @@
 export default interface product {
-  name: string;
-  value: number;
-  quantity: number;
+  description: string;
+  setor:string;
   active?: boolean;
+  prioridade : string;
+  user : [ 
+     nome : string,
+     
+  ]
 }

@@ -1,6 +1,5 @@
 import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { ForgetPasswordModalComponent } from "../forget-password-modal/forget-password-modal.component";
 import { NgIf } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserServiceService } from '../../service/user-service.service';
@@ -11,7 +10,7 @@ import { User } from '../../model/user';
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [ForgetPasswordModalComponent, RouterLink, RouterLinkActive, ReactiveFormsModule],
+  imports: [RouterLink, RouterLinkActive, ReactiveFormsModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
@@ -37,7 +36,6 @@ export class LoginPageComponent implements OnInit {
     console.log(this.users)
     this.RegisterForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
       senha: new FormControl('', [Validators.required]),
 
     })
@@ -49,26 +47,7 @@ export class LoginPageComponent implements OnInit {
 
   }
 
-  ngAfterViewInit() {
-
-    if (this.registerButtonRef) {
-      this.renderer.listen(this.registerButtonRef.nativeElement, 'click', () => {
-
-        if (this.containerRef) {
-          this.renderer.addClass(this.containerRef.nativeElement, 'right-panel-active');
-        }
-      });
-    }
-    if (this.loginButtonRef) {
-      this.renderer.listen(this.loginButtonRef.nativeElement, 'click', () => {
-
-        if (this.containerRef) {
-          this.renderer.removeClass(this.containerRef.nativeElement, 'right-panel-active');
-        }
-      })
-    }
-  }
-  onCLick(event: Event) {
+ onCLick(event: Event) {
     event.preventDefault();
     const nome = String(this.LoginForm.get('nome')?.value || '').trim();
     const senha = Number(this.LoginForm.get('senha')?.value)

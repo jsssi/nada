@@ -1,10 +1,12 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { NavBarComponent } from "../nav-bar/nav-bar.component";
+
 import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import { UserServiceService } from '../../service/user-service.service';
 import product from '../../model/Products';
 import { productService } from '../../service/product.service';
 import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { User } from '../../model/user';
 
 
 
@@ -12,13 +14,15 @@ import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Valid
   selector: 'app-home-page',
   standalone: true,
   imports: [
-    NavBarComponent,
+    
     NgFor,
     NgClass,
     NgIf,
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
@@ -34,25 +38,34 @@ export class HomePageComponent implements OnInit {
 
   cardIndex: number | null = null;
   products: product[] = [];
+  Users:User[] =[]
+  prioridades = [
+    {name : "Baixa"},
+    {name : "Media"},
+    {name: "Alta"}
+  ]
 
   //Forms
   productForm!: FormGroup;
   editProductForm!: FormGroup;
 
-  constructor(private renderer: Renderer2, private productService: productService) { }
+  constructor(private renderer: Renderer2, private productService: productService , private userService:UserServiceService) { }
   ngOnInit(): void {
     this.products = this.productService.getAllProducts();
 
     this.productForm = new FormGroup({
-      name: new FormControl('',[Validators.required]),
-      value: new FormControl('',[Validators.required , Validators.pattern('^[0-9]*$')]),
-      quantity: new FormControl('',[Validators.required , Validators.min(1)]),
+      descriçao: new FormControl('',[Validators.required]),
+      setor: new FormControl('',[Validators.required]),
+      usuario: new FormControl('',[Validators.required]),
+      prioridade : new FormControl('',[Validators.required])
     })
     this.editProductForm = new FormGroup({
       NewName: new FormControl('',[Validators.required]),
       NewValue: new FormControl('',[Validators.required]),
       NewQuantity: new FormControl('',[Validators.required]),
     })
+
+    this.Users = this.userService.getUsers();
   }
   //Dom Page//
 
@@ -98,37 +111,7 @@ export class HomePageComponent implements OnInit {
   //Editando Card
   editCardProduct(index: number) {
 
-    let NewName = this.editProductForm.get('NewName')?.value;
-    let NewValue = this.editProductForm.get('NewValue')?.value;
-    let NewQuantity = this.editProductForm.get('NewQuantity')?.value;
-
-
-    let currentProduct = this.products[index];
-    let active = currentProduct.active;
-
-
-    let updatedValues: any = { active };
-
-    if (NewName !== null && NewName !== '') {
-      updatedValues.name = NewName;
-    } else {
-      updatedValues.name = currentProduct.name;
-    }
-
-    if (NewValue !== null && NewValue !== '') {
-      updatedValues.value = NewValue;
-    } else {
-      updatedValues.value = currentProduct.value;
-    }
-
-    if (NewQuantity !== null && NewQuantity !== '') {
-      updatedValues.quantity = NewQuantity;
-    } else {
-      updatedValues.quantity = currentProduct.quantity;
-    }
-
-    this.productService.editProduct(updatedValues, index)
-    this.closeExpansion();
+    
   }
 }
 

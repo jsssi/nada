@@ -1,58 +1,19 @@
-<h1 class="logo">Logo.</h1>
-
 <div class="container" id="main" #main>
-
-  <div class="sign-up">
+<div class="sign-up">
     <form [formGroup]="RegisterForm" #formDir="ngForm">
       <h1>Create Account</h1>
       <div class="form-field">
         <label>Name</label>
         <input type="text" formControlName="name">
       </div>
-      <div class="form-field">
-        <label>Email</label>
-        <input type="text" formControlName="email">
-      </div>
+      
       <div class="form-field">
         <label>Password</label>
         <input type="password" formControlName="senha">
       </div>
 
 
-      <button class="btn-form" (click)="addUser()">Sign Up</button>
+      <button class="btn-form" (click)="addUser()" routerLink="/home" routerLinkActive="active">Sign Up</button>
     </form>
   </div>
-  <div class="sign-in">
-    <form [formGroup]="LoginForm" #formDir="ngForm">
-      <h1>Sign in</h1>
-      <div class="form-field">
-        <label>Nome</label>
-        <input type="text" formControlName="nome">
-      </div>
-
-      <div class="form-field">
-        <label>Senha</label>
-        <input type="password" formControlName="senha">
-      </div>
-
-      <a routerLink="/forgetPassword" routerLinkActive="active"> Forget your
-        password</a>
-
-      <button class="btn-form" (click)="onCLick($event)">Sign In</button>
-    </form>
   </div>
-  <div class="overlay-container">
-    <div class="overlay">
-      <div class="overlay-left">
-        <h1>Welcome back</h1>
-        <p>to keep connected with us please login with your personal info</p>
-        <button class="btn-overlay" id="login" #login>Sing In</button>
-      </div>
-      <div class="overlay-right">
-        <h1>hello , Friend</h1>
-        <p>Enter your personal details and start exploring our services</p>
-        <button class="btn-overlay" id="register" #register>Sign Up</button>
-      </div>
-    </div>
-  </div>
-</div>

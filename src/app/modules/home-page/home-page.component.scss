@@ -105,6 +105,10 @@
 
         width: 50%;
         height: auto;
+        select{
+          border: 1px solid gray;
+          width: 5vw;
+        }
 
         label {
           font-size: .9rem;
